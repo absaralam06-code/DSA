@@ -23,32 +23,30 @@ Thus, the score of n is 1 + 4 = 5*/
 
 using namespace std;
 
-class Solution {
-public:
-    int digitFrequencyScore(int n) {
-        vector<int> freq(10, 0);
+int digitFrequencyScore(int n) {
+    vector<int> arr(10, 0);
 
-        if (n == 0) {
-            return 0;
-        }
-
-        while (n > 0) {
-            freq[n % 10]++;
+    if (n == 0) {
+        arr[0] = 1;
+    } else {
+        while (n != 0) {
+            arr[n % 10]++;
             n /= 10;
         }
-
-        int score = 0;
-        for (int digit = 0; digit < 10; digit++) {
-            score += digit * freq[digit];
-        }
-
-        return score;
     }
-};
+
+    int sum = 0;
+    for (int i = 0; i < 10; i++) {
+        sum += i * arr[i];
+    }
+
+    return sum;
+}
 
 int main() {
-    Solution solver;
-    int testNumber = 122;
-    cout << solver.digitFrequencyScore(testNumber) << endl;
+    int n;
+    if (cin >> n) {
+        cout << digitFrequencyScore(n) << endl;
+    }
     return 0;
 }
